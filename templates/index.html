@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Submit</title>
+</head>
+<body>
+    <h1>Submit Your Video</h1>
+    <form id="videoForm">
+        <input type="text" id="videoUrl" placeholder="Enter video URL" required>
+        <button type="submit">Submit</button>
+    </form>
+    <p id="response"></p>
+    <script>
+        document.getElementById("videoForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const url = document.getElementById("videoUrl").value;
+            fetch("/submit", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ video_url: url })
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("response").innerText = data.message)
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>
