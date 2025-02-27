@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Video Submit</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Your Video</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Submit Your Video</h1>
-    <form id="videoForm">
-        <input type="text" id="videoUrl" placeholder="Enter video URL" required>
-        <button type="submit">Submit</button>
-    </form>
-    <p id="response"></p>
-    <script>
-        document.getElementById("videoForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            const url = document.getElementById("videoUrl").value;
-            fetch("/submit", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ video_url: url })
-            })
-            .then(response => response.json())
-            .then(data => document.getElementById("response").innerText = data.message)
-            .catch(error => console.error("Error:", error));
-        });
-    </script>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+    <div class="bg-white p-8 rounded-2xl shadow-lg max-w-md text-center">
+        <h1 class="text-2xl font-bold text-gray-800">🎥 Submit Your Video</h1>
+        <p class="text-gray-600 mt-2">Share your YouTube video link below.</p>
+
+        <form action="/" method="post" class="mt-4">
+            <input type="text" name="video_url" placeholder="Enter video URL"
+                class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit"
+                class="mt-3 w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300">
+                Submit
+            </button>
+        </form>
+    </div>
+
 </body>
 </html>
